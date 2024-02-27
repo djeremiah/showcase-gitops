@@ -1,0 +1,21 @@
+apiVersion: backstack.dev/v1alpha1
+kind: EKSCluster
+metadata:
+  name: testcluster
+  namespace: default
+spec:
+  parameters:
+    id: testcluster
+    region: eu-west-1
+    iam:
+      roleArn: 
+    version: "1.28"
+    nodes:
+      count: 3
+      instanceType: t3.small
+  writeConnectionSecretToRef:
+    name: testcluster-kubeconfig
+  publishConnectionDetailsTo:
+    name: testcluster/testcluster-kubeconfig
+    configRef:
+      name: vault
